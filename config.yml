@@ -1,0 +1,101 @@
+:drotto:
+  # mode: head - the last block
+  # mode: irreversible - the block that is confirmed by 2/3 of all block
+  # producers and is thus irreversible!
+  :block_mode: irreversible
+  
+  # Main account name.
+  :account_name: social
+  
+  # Account to use for voting.  Use this if delegation is not supported or
+  # desired.  You can leave this unset to default to account_name.
+  :voter_account_name: social
+  
+  # Account to use for voting power calculations.  Use this if you want to
+  # regulate voting from an account other than the voter_account_name.  You can
+  # leave this unset to default to voter_account_name.
+  :voting_power_account_name: social
+  
+  # Posting wif is used to vote reply with a confirm comment.  See
+  # `support/confirm.md` to customize the confirmation comment.
+  :posting_wif: 5JrvPrQeBBvCRdjv29iDvkwn3EQYZ9jqfAHzrCyUvfbEbRkrYFC
+  
+  # Use this if voter_account_name is set.  Defaults to posting_wif if not set.
+  :voting_wif: 5JrvPrQeBBvCRdjv29iDvkwn3EQYZ9jqfAHzrCyUvfbEbRkrYFC
+  
+  # Active wif is only used in bounce mode to return funds.  Please transfer
+  # funds out of your wallet before using bounce mode.
+  :active_wif: 5JrvPrQeBBvCRdjv29iDvkwn3EQYZ9jqfAHzrCyUvfbEbRkrYFC
+  
+  # Maximum age of post (in minutes).  Bids not accepted are returned, if
+  # refunds are enabled.  7,200 minutes is 5 days.  Setting this avoids
+  # situations, for example, where someone bids 13 hours away from payout but
+  # the window is 11 hours away from payout, thus locked during the window.
+  :max_age: 7200
+  
+  # Batch vote weight is split between the bidders.  This value also sets the
+  # batch timespan.  E.g.: Setting 100.00 % results in one batch every 2.4
+  # hours; 50.00 % results in one batch every 1.2 hours; so on.
+  :batch_vote_weight: 100.00 %
+  
+  # If present at the beginning of the transfer memo, vote weight will be
+  # inverted into a flag.
+  # :flag_prefix: '!!!'
+  
+  # When calculating a window, a bid will be ignored if it doesn't reach this
+  # minimum.  If 0.00 %, all bids are accepted no matter how little they impact
+  # the total.
+  :min_effective_weight: 0.25 %
+  
+  # When calculating a window, a bid that reaches this weight will take the
+  # entire window.  All other bids will be processed in the next window.  This
+  # will address situations where people "over-bid" which shocks the window.
+  # The highest bid that is equal to or greater than this weight gets its own
+  # window and delays the rest of the bids.  If there's a tie, the window goes
+  # to the oldest bid.
+  # :max_effective_weight: 75.00 %
+  
+  # This is the amount to of voting weight to reserve in each voting batch.
+  # Normally, this should be set to 0.00 % unless this account often casts votes
+  # outside of Dr. Otto.
+  :reserve_vote_weight: 0.00 %
+  
+  # Minimum bid amount.
+  :minimum_bid: 2.000 SBD
+  
+  # List of alternative assets to allow by using current market rate reported by
+  # the Market History API.
+  # :alternative_assets: STEEM
+  
+  # Set this true to allow bids for comments as well as root posts.
+  :allow_comment_bids: false
+  
+  # Completely ignore this asset when processing bounce.  This is mainly if you
+  # want to accept donations in a different asset.
+  :ignore_asset: STEEM
+  
+  # List of accounts that shall not get votes, separated by spaces.
+  :blacklist: mikethemug
+  
+  # List of accounts that shall not get bounced, separated by spaces.
+  :no_bounce: bittrex poloniex openledger
+  
+  # List of accounts that shall not get comments, separated by spaces.
+  :no_comment: bittrex poloniex openledger
+  
+  # How much to charge a bid for not commenting.
+  :no_comment_fee: 0.00 %
+  
+  # Automatically bounce bids for posts that are locked out since they are
+  # 12-hours until cashout and cannot be upvoted.  By default, the `max_age`
+  # option set at 7200 precludes the need to set this option to true.  But if
+  # you configure `max_age` to allow voting exacly up to the lock-out point,
+  # then it's handy to set this option to true because the blockchain will
+  # return a lockout error that drotto can use to safely initiate a bounce.
+  :auto_bounce_on_lockout: false
+  
+  # Text used in memo if refunds are enabled.
+  :bounce_memo: Unable to accept bid.
+:chain_options:
+  :chain: steem
+  :url: https://api.steemit.com
